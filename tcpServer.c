@@ -1,9 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-
 #include <sys/socket.h>
 #include <sys/types.h>
-
 #include <netinet/in.h>
 
 int main() {
@@ -17,10 +15,13 @@ int main() {
     // define server address
     struct sockaddr_in serverAddress;
     serverAddress.sin_family = AF_INET;
-    // port number must be converted from int into datatype server can use
+
+    // port number must be converted from int into network byte order
     serverAddress.sin_port = htons(8080);
+    
     // sin_addr is struct itself
     // INADDR_ANY is equivalent of address 0.0.0.0
+    // listen on all addresses
     serverAddress.sin_addr.s_addr = INADDR_ANY;
 
     // bind socket to IP and port
